@@ -35,3 +35,7 @@ var Game = function() {
 Game.prototype = Object.create(Phaser.Game.prototype);
 
 module.exports = new Game();
+
+if(module.hot) {
+    module.hot.accept();
+}
