@@ -11,7 +11,7 @@ var path = require('path');
 var app = express();
 
 const isDevelopment = app.get('env') !== 'production';
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 7000;
 const distDir = path.join(__dirname, 'dist');
 const compiler = webpack(config);
 
