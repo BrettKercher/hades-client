@@ -1,7 +1,7 @@
 /**
  * Created by Brett on 4/21/2017.
  */
-const Player = require('../gameplay/character/player_character');
+const Player = require('../gameplay/character/player-character');
 
 var MainState = function() {
     Phaser.State.prototype.constructor.call(this);

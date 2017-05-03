@@ -2,40 +2,44 @@
  * Created by Brett on 4/21/2017.
  */
 
-//CSS
+//Style
 require('../prototype.css');
 
-//REQUIRED GLOBALS
+//Import required globals
 PIXI = require('phaser-ce/build/custom/pixi');
 p2 = require('phaser-ce/build/custom/p2');
 Phaser = require('phaser-ce/build/custom/phaser-split');
 
-//STATES
+//// Import Dependencies
+
+//States
 const BootState = require('./states/boot');
 const LoadState = require('./states/load');
 const StartState = require('./states/start');
 const MainState = require('./states/main');
 
-var Game = function() {
+//UI
+import React from 'react';
+import ReactDOM from'react-dom';
+import UI from './ui/ui-main';
 
-    //Initialize Phaser Game
-    var appContainer = $('#appContainer');
-    Phaser.Game.prototype.constructor.call(this, appContainer.width(), appContainer.height(), Phaser.AUTO, '', null);
+export default class Game extends Phaser.Game {
+    constructor() {
+        let appContainer = $('#appContainer');
+        super(appContainer.width(), appContainer.height(), Phaser.AUTO, '', null);
 
-    //Set up States
-    this.state.add('Boot', BootState, false);
-    this.state.add('Load', LoadState, false);
-    this.state.add('Start', StartState, false);
-    this.state.add('Main', MainState, false);
+        //Set up States
+       this.state.add('Boot', BootState, false);
+       this.state.add('Load', LoadState, false);
+       this.state.add('Start', StartState, false);
+       this.state.add('Main', MainState, false);
 
-    //start the boot state
-    this.state.start('Boot');
-};
+       //Render UI
+        ReactDOM.render(< UI />, document.querySelector('#root'));
 
-Game.prototype = Object.create(Phaser.Game.prototype);
-
-module.exports = new Game();
-
-if(module.hot) {
-    module.hot.accept();
+       //start the boot state
+       this.state.start('Boot');
+    }
 }
+
+window.game = new Game();

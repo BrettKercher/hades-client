@@ -19,7 +19,31 @@ module.exports = {
     module: {
         rules: [
             {test: /\.css$/, loader: "style-loader!css-loader"},
-            {test: /\.(png|jpg)$/, use: 'url-loader?limit=8192'}
+            {test: /\.(png|jpg)$/, use: 'url-loader?limit=8192'},
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    "presets": ["react", "es2015", "stage-0", "react-hmre"]
+                }
+            },
+            {
+                test: require.resolve('jquery'),
+                use: [{ loader: 'expose-loader', options: '$' }]
+            },
+            {
+                test: require.resolve('phaser-ce/build/custom/pixi'),
+                use: [{ loader: 'expose-loader', options: 'PIXI' }]
+            },
+            {
+                test: require.resolve('phaser-ce/build/custom/p2'),
+                use: [{ loader: 'expose-loader', options: 'p2' }]
+            },
+            {
+                test: require.resolve('phaser-ce/build/custom/phaser-split'),
+                use: [{ loader: 'expose-loader', options: 'Phaser' }]
+            }
         ]
     },
     plugins: [
