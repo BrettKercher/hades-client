@@ -10,20 +10,14 @@ StartState.prototype = Object.create(Phaser.State.prototype);
 
 StartState.prototype.create = function() {
 
-    // Show menu UI
-    $('#menu').show();
-
     //Set up event listeners
     this.game.client.signals.connectionSuccessful.add(this.onConnectionSuccessful, this);
     this.game.client.signals.connectionError.add(this.onConnectionError, this);
-    $('#btnPlay').click(this.onPlayClicked.bind(this));
 };
 
 StartState.prototype.onPlayClicked = function() {
     var name = $('#inName').val();
-    this.game.client.connect();
-
-    //ask front end for validation?
+    //this.game.client.connect();
 };
 
 StartState.prototype.onConnectionSuccessful = function() {

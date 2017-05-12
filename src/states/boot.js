@@ -14,8 +14,8 @@ BootState.prototype.create = function() {
 
     //Initialize core systems
     this.game.client = new Client();
-
-    this.state.start('Load');
+    this.game.client.connect();
+    //this.state.start('Load');
 };
 
 

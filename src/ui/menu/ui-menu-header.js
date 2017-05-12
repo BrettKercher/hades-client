@@ -9,8 +9,15 @@ class MenuHeaderUI extends Component {
         super(props);
     }
     render() {
+
+        let style = {
+            height: '60px'
+        };
+
         return (
-            <h1>Header</h1>
+            <div style={style}>
+                <h4>Header</h4>
+            </div>
         )
     }
 }

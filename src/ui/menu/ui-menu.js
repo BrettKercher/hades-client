@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 
 import Header from './ui-menu-header';
-import Content from './ui-menu-content';
+import Content from './content/ui-menu-content';
 import Footer from './ui-menu-footer';
 
 class MenuUI extends Component {
@@ -13,8 +13,15 @@ class MenuUI extends Component {
         super(props);
     }
     render() {
+
+        let style = {
+            flexDirection: 'column',
+            height: '100vh',
+            display: 'flex'
+        };
+
         return (
-            <div>
+            <div style={style}>
                 <Header/>
                 <Content/>
                 <Footer/>

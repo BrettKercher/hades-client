@@ -2,9 +2,10 @@
  * Created by Brett on 4/22/2017.
  */
 
-const assert = require('assert');
+//const assert = require('assert');
+import assert from 'assert';
 
-var Client = function() {
+let Client = function() {
     this.initDefaultValues();
     this.initMessageParsers();
 };
@@ -21,7 +22,6 @@ Client.PacketTypes = {
 //  INITIALIZATION METHODS
 //
 //--------------------------------------------------
-
 
 Client.prototype.initDefaultValues = function () {
     this.connected = false;
@@ -56,14 +56,13 @@ Client.prototype.initMessageParsers = function() {
 //
 //--------------------------------------------------
 
-
 Client.prototype.connect = function () {
 
-    if(__DEV__) {
-        this.socket = new WebSocket('ws://localhost:9001');
+    if(process.env.NODE_ENV !== 'production') {
+        this.socket = new WebSocket('ws://localhost:7001');
     }
     else {
-        this.socket = new WebSocket('ws://174.138.68.104:9001');
+        this.socket = new WebSocket('ws://174.138.68.104:7001');
     }
 
     this.socket.binaryType = 'arraybuffer';
@@ -76,8 +75,8 @@ Client.prototype.connect = function () {
 };
 
 Client.prototype.parseBinaryMessage = function (message) {
-    var data = new DataView(message, 0);
-    var packetType = data.getUint8(0, true);
+    let data = new DataView(message, 0);
+    let packetType = data.getUint8(0, true);
 
     assert(this.parsers[packetType] && this.parsers[packetType].read);
 
@@ -99,11 +98,10 @@ Client.prototype.sendMessage = function(packetType, payload) {
 //
 //--------------------------------------------------
 
-
 Client.prototype.readNewSessionPacket = function (packet) {
 
-    var byteIndex = 1;
-    var newSessionPacket = {};
+    let byteIndex = 1;
+    let newSessionPacket = {};
 
     newSessionPacket.assignedId = packet.getUint32(byteIndex, true);
     byteIndex += 4;
@@ -112,7 +110,7 @@ Client.prototype.readNewSessionPacket = function (packet) {
     byteIndex += 4;
 
     newSessionPacket.otherPlayers = [];
-    for(var i = 0; i < newSessionPacket.numOtherPlayers; i++)
+    for(let i = 0; i < newSessionPacket.numOtherPlayers; i++)
     {
         newSessionPacket.otherPlayers[i] = packet.getUint32(byteIndex, true);
         byteIndex += 4;
@@ -124,17 +122,19 @@ Client.prototype.readNewSessionPacket = function (packet) {
 
 Client.prototype.readPlayerJoinedPacket = function (packet) {
 
-    var byteIndex = 1;
-    var playerJoinedPacket = {};
+    let byteIndex = 1;
+    let playerJoinedPacket = {};
     playerJoinedPacket.newPlayerId = packet.getUint32(byteIndex, true);
 
     this.signals.playerJoined.dispatch(this, playerJoinedPacket);
 };
 
+/**
+ * @return {boolean}
+ */
 Client.prototype.IsConnected = function() {
     return this.connected;
 };
-
 
 //--------------------------------------------------
 //

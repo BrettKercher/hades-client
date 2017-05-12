@@ -9,8 +9,15 @@ class MenuFooterUI extends Component {
         super(props);
     }
     render() {
+
+        let style = {
+            height: '60px'
+        };
+
         return (
-            <h1>Footer</h1>
+            <div style={style}>
+                <h4>Footer</h4>
+            </div>
         )
     }
 }

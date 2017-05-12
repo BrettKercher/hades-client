@@ -5,37 +5,12 @@ html, body {
   background-color: black;
 }
 
-#appContainer {
+#root {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-}
-
-#menuHeader {
-  height: 60px;
-}
-
-#menuBody {
-  flex: 1;
-  margin: 0 auto;
-  width: 50%;
-  text-align: center;
-}
-
-#menuFooter {
-  height: 60px;
-}
-
-#menu {
-  flex-direction: column;
-  height: 100vh;
-  display: none;
-}
-
-#btnPlay {
-  margin-top: 10px;
 }
 
 .noselect {
@@ -44,6 +19,5 @@ html, body {
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
